@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  font-family: monospace;
+}
+
+.btn-container {
+  margin-bottom: 20px;
+}
+
+.btn {
+  width: 216px;
+  height: 41px;
+  font-size: 12px;
+  box-shadow: 5px 5px black;
+  cursor: pointer;
+}
