@@ -7,19 +7,17 @@ import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-const RouterSpy = jasmine.createSpyObj('Router', ['navigate']);
-
 describe('SearchPeopleComponent', () => {
   let component: SearchPeopleComponent;
   let fixture: ComponentFixture<SearchPeopleComponent>;
   let starWarsApiSpy: jasmine.SpyObj<StarWarsApi>;
-  let router: Router;
 
   beforeEach(() => {
     const spy = jasmine.createSpyObj(StarWarsApi, [
       'fetchPlanetDetails',
       'fetchPersonsList',
     ]);
+    const RouterSpy = jasmine.createSpyObj('Router', ['navigate']);
     TestBed.configureTestingModule({
       declarations: [SearchPeopleComponent],
       providers: [
@@ -30,7 +28,6 @@ describe('SearchPeopleComponent', () => {
     });
     fixture = TestBed.createComponent(SearchPeopleComponent);
     component = fixture.componentInstance;
-    //router = TestBed.get(Router);
     starWarsApiSpy = TestBed.inject(StarWarsApi) as jasmine.SpyObj<StarWarsApi>;
     fixture.detectChanges();
   });
@@ -40,8 +37,6 @@ describe('SearchPeopleComponent', () => {
   });
 
   it('should calculate planet volumes for given enemy list', () => {
-    //const navigateSpy = spyOn(router, 'navigate');
-    //expect(navigateSpy).toHaveBeenCalledWith(['/expectedUrl']);
     starWarsApiSpy.fetchPlanetDetails.and.returnValue(
       of({ name: 'planet', diameter: '3' } as Planet)
     );
