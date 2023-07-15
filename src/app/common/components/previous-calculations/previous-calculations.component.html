@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="btn-container">
+    <button class="btn" [routerLink]="['/search']">
+      <i class="fa fa-2x fa-plus"></i> Neue Berechnung
+    </button>
+  </div>
+  <div class="table-container">
+    <h3>Bisherige Berechnungen</h3>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 col-6">
+      <!-- Personen Column -->
+      <ng-container matColumnDef="persons">
+        <th mat-header-cell *matHeaderCellDef>Personen</th>
+        <td mat-cell *matCellDef="let element">{{ element.persons }}</td>
+      </ng-container>
+
+      <!-- Volumen Column -->
+      <ng-container matColumnDef="volume">
+        <th mat-header-cell *matHeaderCellDef>Volumen der Planeten</th>
+        <td mat-cell *matCellDef="let element">
+          <ng-container *ngIf="element.volume">
+            {{ element.volume + " km" }}<sup>3</sup>
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns; let i = index"
+        [ngClass]="{ 'style-row': i % 2 == 0 }"
+      ></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td
+          class="mat-cell"
+          [colSpan]="displayedColumns.length"
+          [ngStyle]="{ border: '1px solid black' }"
+        >
+          Noch keine Daten, bitte führen Sie Berechnungen durch.
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

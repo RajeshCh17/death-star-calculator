@@ -1,0 +1,62 @@
+<div class="search-people-container">
+  <p class="search-title">Suche in Personen-Datenbank</p>
+  <div class="search-container">
+    <div class="search-form">
+      <input
+        type="text"
+        aria-label="Person"
+        #userInput
+        [(ngModel)]="query"
+        style="text-transform: capitalize"
+        (keyup)="fetchQueryResult()"
+      />
+      <button><i class="fa fa-search"></i></button>
+    </div>
+    <ul>
+      <ng-container *ngIf="list.length; else hint">
+        <li
+          *ngFor="let listItem of list; let i = index"
+          (click)="addToEnemyList(listItem)"
+        >
+          {{ listItem.name }}
+        </li>
+      </ng-container>
+      <ng-template #hint>
+        <p>**Bitte ändern Sie die Abfrage</p>
+      </ng-template>
+    </ul>
+  </div>
+  <div class="enemy-list-container">
+    <ul>
+      <ng-container *ngIf="selectedEnemyList.length">
+        <li *ngFor="let selectedEnemy of selectedEnemyList">
+          {{ selectedEnemy.name }}
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+  <div class="btn-container">
+    <button
+      class="btn"
+      (click)="computeAreaOfPlanets()"
+      [disabled]="!selectedEnemyList.length"
+    >
+      Volumen berechnen
+    </button>
+  </div>
+  <p>
+    Das Volumen der Planeten betraget:&nbsp;&nbsp;
+    <ng-container *ngIf="computedVolume > 0">
+      <span>{{ computedVolume + " km" }}<sup>3</sup></span>
+    </ng-container>
+  </p>
+  <div class="btn-container">
+    <button
+      class="btn"
+      (click)="acceptCalculations()"
+      [disabled]="!selectedEnemyList.length"
+    >
+      Berechnung übernehmen
+    </button>
+  </div>
+</div>
