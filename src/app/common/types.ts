@@ -17,7 +17,7 @@ export interface Person {
   url: string;
 }
 
-export interface SearchPersonresponse {
+export interface SearchPersonResponse {
   count: number;
   next: string;
   previous: any;

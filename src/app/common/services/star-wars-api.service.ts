@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { Person, Planet, SearchPersonresponse } from '../types';
+import { Person, Planet, SearchPersonResponse } from '../types';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class StarWarsApi {
     let URL = `${environment.apiUrlPeople}`;
     if (query) URL = `${URL}?search=${query}`;
     return this.http
-      .get<SearchPersonresponse>(URL)
+      .get<SearchPersonResponse>(URL)
       .pipe(map((res) => res.results));
   }
 
